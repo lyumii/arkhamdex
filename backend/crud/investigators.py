@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import func
 from models import Investigator
 
 def get_investigators(db: Session):

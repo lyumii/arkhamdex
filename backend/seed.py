@@ -25,6 +25,7 @@ def serialize_obj(x):
 df_cards = df_cards.applymap(serialize_obj)
 
 df_investigators = df_investigators.rename(columns={"code": "id"})
+df_cards = df_cards.rename(columns={"code": "id"})
 
 
 columns_to_keep_investigators = [
