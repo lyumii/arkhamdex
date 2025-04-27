@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from crud import investigators as crud_investigators
 from database import get_db
@@ -11,8 +11,8 @@ router = APIRouter()
 def read_investigators(db: Session = Depends(get_db)):
     return crud_investigators.get_investigators(db)
 
-@router.get("/investigators/{investigator_id}")
-def get_investigator(investigator_id: str, db: Session = Depends(get_db)):
+@router.get("/investigators/{investigator_id:int}")
+def get_investigator(investigator_id: int, db: Session = Depends(get_db)):
     investigator = crud_investigators.get_investigator_by_id(investigator_id, db)
     if not investigator:
         raise HTTPException(status_code=404, detail="Investigator not found.")
@@ -31,3 +31,10 @@ def get_investigators_by_pack(pack_name: str, db: Session = Depends(get_db)):
     if not pack_investigators:
         raise HTTPException(status_code=404, detail="Investigators not found")
     return pack_investigators
+
+@router.get("/investigators/search")
+def search_investigators(search_query: str = Query(..., min_length = 1), db: Session = Depends(get_db)):
+    investigator = crud_investigators.search_investigator(search_query, db)
+    if not investigator:
+        raise HTTPException(status_code=404, detail="Investigator not found")
+    return investigator

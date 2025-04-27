@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 
 class InvestigatorBase(BaseModel):
-    id: str  
+    id: int  
     name: str
     subname: Optional[str] = None
     pack_name: str
