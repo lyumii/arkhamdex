@@ -5,7 +5,7 @@ from models import Investigator
 def get_investigators(db: Session):
     return db.query(Investigator).all()
 
-def get_investigator_by_id(investigator_id: int, db: Session):
+def get_investigator_by_id(investigator_id: str, db: Session):
     return db.query(Investigator).filter(Investigator.id == investigator_id).first()
 
 def get_investigators_by_class(faction_name: str, db: Session):

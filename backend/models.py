@@ -4,7 +4,7 @@ from database import Base
 class Investigator(Base):
     __tablename__ = "investigators"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(String, primary_key=True, index=True)
     name = Column(String)
     subname = Column(String)
     pack_name = Column(String)
