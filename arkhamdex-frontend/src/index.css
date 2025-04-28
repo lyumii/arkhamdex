@@ -21,9 +21,9 @@ body {
   width: 90vw;
   height: 25vh;
   overflow: hidden;
-  margin: auto;
+  margin: 2em auto;
   border: 5px solid rgba(14, 26, 34, 0.6);
-  box-shadow: 0 8px 20px rgba(14, 26, 34, 0.7), 0 0 30px rgba(76, 47, 34, 0.4);
+  box-shadow: 0 8px 20px rgba(11, 16, 28, 0.7), 0 0 30px rgba(76, 47, 34, 0.4);
   border-radius: 5px;
 }
 
@@ -67,7 +67,7 @@ body {
   border: none;
   border-radius: 20px;
   margin-top: 1.5em;
-  box-shadow: 0 8px 20px rgba(14, 26, 34, 0.7), 0 0 30px rgba(76, 47, 34, 0.4);
+  box-shadow: 0 8px 20px rgba(19, 35, 46, 0.7), 0 0 30px rgba(88, 55, 40, 0.4);
   color: #d2984ccf;
   font-size: 1.2em;
   letter-spacing: 0.2em;
