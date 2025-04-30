@@ -74,3 +74,52 @@ body {
   font-family: "Cthulhumbus", serif;
   font-weight: 600;
 }
+
+.cropped-investigator {
+  width: 200px;
+  height: 280px;
+  object-fit: cover;
+  object-position: left top;
+  border-radius: 8px;
+}
+
+.cropped-card {
+  width: 200px;
+  height: 190px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 8px;
+}
+
+.random-cards {
+  display: flex;
+  width: 90vw;
+  margin: auto;
+  gap: 2em;
+  justify-content: space-between;
+}
+
+.random-cards div {
+  background-color: #080b0d5f;
+  flex: 1;
+  padding: 1em;
+  color: #d2974c;
+  border-radius: 8px;
+}
+
+.investigatorcard {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.playercard {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.playercarddiv {
+  display: flex;
+  gap: 1em;
+}
