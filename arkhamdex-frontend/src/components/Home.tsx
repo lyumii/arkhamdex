@@ -3,6 +3,7 @@ import { useInvestigators } from "./contexts/LoadInvestigatorsContext";
 import InvestigatorCard from "./cards/InvestigatorCard";
 import { usePlayerCards } from "./contexts/LoadPlayerCardsContext";
 import PlayerCard from "./cards/PlayerCardCard";
+import { Link } from "react-router";
 
 export default function App() {
   const { investigators } = useInvestigators();
@@ -30,7 +31,9 @@ export default function App() {
       </section>
 
       <div className="homebuttondiv">
-        <button>Browse Investigators</button>
+        <Link to="/investigators">
+          <button>Browse Investigators</button>
+        </Link>
         <button>Browse Cards</button>
         <button>Log in</button>
       </div>

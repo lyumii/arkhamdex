@@ -2,8 +2,8 @@ export interface InvestigatorCardProps {
   id: string;
   name: string;
   subname: string;
-  pack: string;
-  faction: string;
+  pack_name: string;
+  faction_name: string;
   text: string;
   willpower: number;
   intellect: number;
@@ -26,7 +26,7 @@ export default function InvestigatorCard(props: InvestigatorCardProps) {
       <div>
         <h2>{props.name}</h2>
         <h3>{props.subname}</h3>
-        <h3>{props.faction}</h3>
+        <h3>{props.faction_name}</h3>
         <h4>{props.traits}</h4>
         <h3>Stats:</h3>
         <ul>
@@ -40,7 +40,7 @@ export default function InvestigatorCard(props: InvestigatorCardProps) {
           <li>Sanity Points: {props.sanity}</li>
         </ul>
         <p>{props.text}</p>
-        <h5>{props.pack}</h5>
+        <h5>{props.pack_name}</h5>
       </div>
     </article>
   );
