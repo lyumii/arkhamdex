@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PlayerCard, { PlayerCardProps } from "./cards/PlayerCardCard";
 import { factions, cycles } from "./FactionsAndCycles";
 import { traits } from "./Traits";
-import Select, { MultiValue } from "react-select";
+import Select, { MultiValue, SingleValue } from "react-select";
 
 export default function PlayerCardPage() {
   const { playerCards } = usePlayerCards();
@@ -13,12 +13,16 @@ export default function PlayerCardPage() {
   const [classButton, setClassButton] = useState(false);
   const [cycleButton, setCycleButton] = useState(false);
   const [traitButton, setTraitButton] = useState(false);
+  const [searchButton, setSearchButton] = useState(false);
 
   const [activeFactions, setActiveFactions] = useState<string[]>([]);
   const [activeCycles, setActiveCycles] = useState<string[]>([]);
+
   const [selectedTrait, setSelectedTrait] = useState<
     MultiValue<{ value: string; label: string }>
   >([]);
+  const [selectedName, setSelectedName] =
+    useState<SingleValue<{ value: string; label: string }>>(null);
 
   const handleChange = (
     selected: MultiValue<{ value: string; label: string }>
@@ -26,9 +30,20 @@ export default function PlayerCardPage() {
     setSelectedTrait(selected);
   };
 
+  const handleNameSearch = (
+    selected: SingleValue<{ value: string; label: string }>
+  ) => {
+    setSelectedName(selected);
+  };
+
   const traitOptions = traits.map((trait) => ({
     value: trait,
     label: trait,
+  }));
+
+  const nameOptions = allCards.map((card) => ({
+    value: card.name,
+    label: card.name,
   }));
 
   useEffect(() => {
@@ -69,6 +84,12 @@ export default function PlayerCardPage() {
 
     const selectedValues = selectedTrait.map((t) => t.value);
 
+    if (selectedName) {
+      filtered = filtered.filter(
+        (card) => card.name.toLowerCase() === selectedName.value.toLowerCase()
+      );
+    }
+
     const filteredCards = filtered.filter(
       (card) =>
         card.traits &&
@@ -76,7 +97,7 @@ export default function PlayerCardPage() {
     );
 
     setFilteredCards(filteredCards);
-  }, [activeFactions, activeCycles, allCards, selectedTrait]);
+  }, [activeFactions, activeCycles, allCards, selectedTrait, selectedName]);
 
   return (
     <section>
@@ -106,6 +127,14 @@ export default function PlayerCardPage() {
           }}
         >
           Trait
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setSearchButton((prev) => !prev);
+          }}
+        >
+          Search by name
         </button>
         <button
           onClick={(e) => {
@@ -167,6 +196,18 @@ export default function PlayerCardPage() {
             isClearable
             isMulti
             placeholder="Filter by trait..."
+          />
+        )}
+        {searchButton && (
+          <Select
+            options={nameOptions}
+            value={selectedName}
+            onChange={handleNameSearch}
+            isClearable
+            placeholder="Search by name..."
+            filterOption={(option, input) =>
+              option.label.toLowerCase().startsWith(input.toLowerCase())
+            }
           />
         )}
         <div className="investigatorslist">

@@ -4,6 +4,7 @@ import InvestigatorCard, {
   InvestigatorCardProps,
 } from "./cards/InvestigatorCard";
 import { factions, cycles } from "./FactionsAndCycles";
+import Select, { SingleValue } from "react-select";
 
 export default function InvestigatorPage() {
   const { investigators } = useInvestigators();
@@ -15,8 +16,23 @@ export default function InvestigatorPage() {
   >([]);
   const [classButton, setClassButton] = useState(false);
   const [cycleButton, setCycleButton] = useState(false);
+  const [searchButton, setSearchButton] = useState(false);
   const [activeFactions, setActiveFactions] = useState<string[]>([]);
   const [activeCycles, setActiveCycles] = useState<string[]>([]);
+
+  const [selectedName, setSelectedName] =
+    useState<SingleValue<{ value: string; label: string }>>(null);
+
+  const nameOptions = investigators.map((inv) => ({
+    value: inv.name,
+    label: inv.name,
+  }));
+
+  const handleNameSearch = (
+    selected: SingleValue<{ value: string; label: string }>
+  ) => {
+    setSelectedName(selected);
+  };
 
   useEffect(() => {
     setAllInvestigators(investigators);
@@ -54,8 +70,14 @@ export default function InvestigatorPage() {
       filtered = cycleFiltered;
     }
 
+    if (selectedName) {
+      filtered = filtered.filter(
+        (inv) => inv.name.toLowerCase() === selectedName.value.toLowerCase()
+      );
+    }
+
     setFilteredInvestigators(filtered);
-  }, [activeFactions, activeCycles, allInvestigators]);
+  }, [activeFactions, activeCycles, allInvestigators, selectedName]);
 
   return (
     <section>
@@ -77,6 +99,14 @@ export default function InvestigatorPage() {
           }}
         >
           Cycle
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setSearchButton((prev) => !prev);
+          }}
+        >
+          Search by name
         </button>
         <button
           onClick={(e) => {
@@ -129,6 +159,18 @@ export default function InvestigatorPage() {
               </button>
             ))}
           </div>
+        )}
+        {searchButton && (
+          <Select
+            options={nameOptions}
+            value={selectedName}
+            onChange={handleNameSearch}
+            isClearable
+            placeholder="Search by name..."
+            filterOption={(option, input) =>
+              option.label.toLowerCase().startsWith(input.toLowerCase())
+            }
+          />
         )}
         <div className="investigatorslist">
           {filteredInvestigators.map((inv) => (
