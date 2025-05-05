@@ -93,19 +93,31 @@ body {
 
 .random-cards {
   display: flex;
-  width: 90vw;
-  margin: auto;
-  gap: 2em;
   justify-content: space-between;
 }
 
-.random-cards div {
+.random-cards,
+.investigatorslist {
+  width: 90vw;
+  margin: auto;
+  gap: 2em;
+}
+
+.random-cards div,
+.investigatorslist {
   background-color: #080b0d5f;
   flex: 1;
   padding: 1em;
   color: #d2974c;
   border-radius: 8px;
 }
+
+/* .investigatorslist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+} */
 
 .investigatorcard {
   display: flex;
