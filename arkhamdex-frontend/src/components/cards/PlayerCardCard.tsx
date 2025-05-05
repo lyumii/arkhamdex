@@ -1,8 +1,8 @@
 export interface PlayerCardProps {
   id: string;
   name: string;
-  pack: string;
-  faction: string;
+  pack_name: string;
+  faction_name: string;
   text: string;
   cost: number;
   slot: string;
@@ -22,7 +22,7 @@ export default function PlayerCard(props: PlayerCardProps) {
         />
         <div>
           <h2>{props.name}</h2>
-          <h3>{props.faction}</h3>
+          <h3>{props.faction_name}</h3>
           <h4>{props.traits}</h4>
           <p>
             {props.cost} |{props.xp} |{props.slot}
@@ -31,7 +31,7 @@ export default function PlayerCard(props: PlayerCardProps) {
       </div>
       <p>{props.text}</p>
 
-      <h5>{props.pack}</h5>
+      <h5>{props.pack_name}</h5>
     </article>
   );
 }
