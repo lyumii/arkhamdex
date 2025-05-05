@@ -19,7 +19,11 @@ export default function InvestigatorCard(props: InvestigatorCardProps) {
   return (
     <article className="investigatorcard">
       <img
-        src={`https://arkhamdb.com${props.imagesrc}`}
+        src={
+          props.imagesrc
+            ? `https://arkhamdb.com${props.imagesrc}`
+            : `/placeholder.png`
+        }
         alt={props.name}
         className="cropped-investigator"
       />

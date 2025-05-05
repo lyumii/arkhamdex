@@ -28,6 +28,7 @@ export default function InvestigatorPage() {
 
   const cycles = [
     { key: "Core Set", value: "Core Set" },
+    { key: "Revised Core Set", value: "Revised Core Set" },
     { key: "The Dunwich Legacy", value: "The Dunwich Legacy" },
     { key: "The Path to Carcosa", value: "The Path To Carcosa" },
     { key: "The Forgotten Age", value: "The Forgotten Age" },
@@ -61,7 +62,7 @@ export default function InvestigatorPage() {
       ],
     },
     {
-      key: "Parallell",
+      key: "Parallel",
       value: [
         "All or Nothing",
         "Aura of Faith",
@@ -74,6 +75,7 @@ export default function InvestigatorPage() {
         "Read or Die",
         "Red Tide Rising",
         "Relics of the Past",
+        "Pistols and Pearls",
       ],
     },
     {
@@ -112,7 +114,7 @@ export default function InvestigatorPage() {
 
         if (Array.isArray(cycle.value)) {
           const matches = filtered.filter((inv) =>
-            cycle.value.includes(inv.name)
+            cycle.value.includes(inv.pack_name)
           );
           cycleFiltered = [...cycleFiltered, ...matches];
         } else {
@@ -150,7 +152,16 @@ export default function InvestigatorPage() {
         >
           Cycle
         </button>
-        <button>Reset</button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setFilteredInvestigators(investigators);
+            setActiveCycles([]);
+            setActiveFactions([]);
+          }}
+        >
+          Reset
+        </button>
         {classButton && (
           <div>
             {factions.map((faction, index) => (
