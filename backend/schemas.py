@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
+from datetime import datetime
 
 class InvestigatorBase(BaseModel):
     id: str  
@@ -48,3 +49,27 @@ class CardBase(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UserCreate(BaseModel):
+    username: str
+    password: str
+
+class UserLogin(BaseModel):
+    username: str
+    password: str
+
+class UserOut(BaseModel):
+    id: str
+    username: str
+    creation_date: datetime
+    saved_decks: Optional[List[Dict[str, Any]]] = None
+    favorite_cards: Optional[List[Dict[str, Any]]] = None
+
+    class Config:
+        from_attributes = True
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str

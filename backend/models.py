@@ -1,5 +1,7 @@
-from sqlalchemy import Column, Integer, String, Text, Boolean, JSON
+from sqlalchemy import Column, Integer, String, Text, Boolean, JSON, DateTime
 from database import Base
+from datetime import datetime
+
 
 class Investigator(Base):
     __tablename__ = "investigators"
@@ -46,3 +48,12 @@ class Card(Base):
     slot = Column(String)
     traits = Column(String)
     imagesrc = Column(String)
+
+class User(Base):
+        __tablename__ = "users"
+        id = Column(String, primary_key=True, index=True)
+        username = Column(String, nullable=False, unique=True)
+        password = Column(String, nullable=False)
+        creation_date = Column(DateTime, default=datetime.utcnow)
+        saved_decks = Column(JSON)
+        favorite_cards = Column(JSON)

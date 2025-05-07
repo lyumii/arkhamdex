@@ -37,7 +37,9 @@ export default function App() {
         <Link to="/cards">
           <button>Browse Cards</button>
         </Link>
-        <button>Log in</button>
+        <Link to="/login">
+          <button>Log in</button>
+        </Link>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import investigators, cards
+from routers import investigators, cards, users
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -14,3 +14,4 @@ app.add_middleware(
 
 app.include_router(investigators.router, tags=["Investigators"])
 app.include_router(cards.router, tags=["Cards"])
+app.include_router(users.router, tags=["Users"])
