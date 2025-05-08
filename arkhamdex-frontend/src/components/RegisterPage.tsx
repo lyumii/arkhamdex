@@ -1,19 +1,20 @@
-import { Link } from "react-router";
+import { register, login } from "../api/AuthRoutes";
 import { useState } from "react";
-import { login } from "../api/AuthRoutes";
 import { useAuth } from "./contexts/AuthContext";
 import { useNavigate } from "react-router";
 import API from "../api/api";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login: authLogin } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      await register(username, password);
+
       const res = await login(username, password);
       const token = res.data.access_token;
 
@@ -28,24 +29,21 @@ export default function LoginPage() {
       authLogin({ id: user.id, username: user.username }, token);
       navigate("/");
     } catch (err) {
-      console.error("Login failed", err);
+      console.error("Register error", err);
     }
   };
+
   return (
     <section>
-      <h1>Log in:</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>Register:</h1>
+      <form onSubmit={handleRegister}>
         <input value={username} onChange={(e) => setUsername(e.target.value)} />
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
-        <p>- or - </p>
-        <Link to="/register">
-          <button>Register</button>
-        </Link>
+        <button type="submit">Make an account</button>
       </form>
     </section>
   );

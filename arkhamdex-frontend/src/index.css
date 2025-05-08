@@ -58,12 +58,13 @@ body {
   width: 90vw;
   margin: auto;
   gap: 1em;
+  align-items: stretch;
 }
 
 .homebuttondiv button {
   background-color: #3a251c;
-  flex: 1;
   padding: 1.5em;
+  flex: 1;
   border: none;
   border-radius: 20px;
   margin-top: 1.5em;

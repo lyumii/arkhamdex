@@ -4,10 +4,12 @@ import InvestigatorCard from "./cards/InvestigatorCard";
 import { usePlayerCards } from "./contexts/LoadPlayerCardsContext";
 import PlayerCard from "./cards/PlayerCardCard";
 import { Link } from "react-router";
+import { useAuth } from "./contexts/AuthContext";
 
 export default function App() {
   const { investigators } = useInvestigators();
   const { playerCards } = usePlayerCards();
+  const { user, logout } = useAuth();
   const randomInvIndex = Math.floor(Math.random() * investigators.length);
   const randomCardIndex = Math.floor(Math.random() * playerCards.length);
   const randomInvestigator = investigators[randomInvIndex];
@@ -15,6 +17,11 @@ export default function App() {
 
   return (
     <section>
+      {user && (
+        <p>
+          Welcome, {user.username}! <button onClick={logout}>logout</button>
+        </p>
+      )}
       <Header />
       <section className="random-cards">
         <div>
@@ -37,9 +44,14 @@ export default function App() {
         <Link to="/cards">
           <button>Browse Cards</button>
         </Link>
-        <Link to="/login">
-          <button>Log in</button>
-        </Link>
+        {user ? (
+          <button>Create a Deck</button>
+        ) : (
+          <Link to="/login">
+            <button>Log in</button>
+          </Link>
+        )}
+        {user && <button>Create a Deck</button>}
       </div>
     </section>
   );
